@@ -217,6 +217,9 @@ def onTweet(strip, text):
 
 def testLights(strip):
   num = 0
+  for i in xrange(LED_COUNT):
+    strip.setPixelColor(num, GREEN)
+  strip.show()
   while True:
     strip.setPixelColor(num, RED)
     strip.show()
