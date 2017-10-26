@@ -90,9 +90,7 @@ def blinkWords(strip, word):
   for led in range(len(ALPHABET)):
     strip.setPixelColor(s[led] + LIGHTSHIFT, OFF)
     strip.show()
-    time.sleep(random.randint(10,80)/1000.0)
-
-  print ('all dead?', len(ALPHABET), LED_COUNT)
+    time.sleep(random.randint(2,35)/1000.0)
 
   #quick delay
   time.sleep(1.75)
@@ -103,10 +101,10 @@ def blinkWords(strip, word):
     if character in ALPHABET:
       strip.setPixelColor(ALPHABET.index(character) + LIGHTSHIFT, RED)
       strip.show()
-      time.sleep(0.6)
+      time.sleep(0.9)
       strip.setPixelColor(ALPHABET.index(character) + LIGHTSHIFT, OFF)
       strip.show()
-      time.sleep(.23)
+      time.sleep(.3)
       print character
     else:
       time.sleep(.75)
