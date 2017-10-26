@@ -105,6 +105,7 @@ def blinkWords(strip, word):
       strip.setPixelColor(ALPHABET.index(character)+LIGHTSHIFT, OFF)
       strip.show()
       time.sleep(.5)
+      print character
     else:
       time.sleep(.75)
 
@@ -169,14 +170,11 @@ def sleep(duration, check):
   if duration:
     time.sleep(duration)
 
-showingTweet = False
-
 def showTweet(strip):
-  showingTweet = True
   if not len(tweets):
     return
 
-  text = tweets.pop(0)
+  text = tweets[0]
 
   #flicker each light, no delay between each
   for i in range(20):
@@ -204,14 +202,14 @@ def showTweet(strip):
 
   initLights(strip)
   time.sleep(3.3)
-  showingTweet = False
+  tweets.pop(0)
 
   if len(tweets):
     showTweet(strip)
 
 def onTweet(strip, text):
   tweets.append(text)
-  if not showingTweet:
+  if len(tweets) == 1:
     showTweet(strip)
 
 # Main program logic follows:
