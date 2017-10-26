@@ -169,7 +169,10 @@ def sleep(duration, check):
   if duration:
     time.sleep(duration)
 
+showingTweet = False
+
 def showTweet(strip):
+  showingTweet = True
   if not len(tweets):
     return
 
@@ -201,9 +204,15 @@ def showTweet(strip):
 
   initLights(strip)
   time.sleep(3.3)
+  showingTweet = False
+
+  if len(tweets):
+    showTweet(strip)
 
 def onTweet(text):
   tweets.append(text)
+  if not showingTweet:
+    showTweet()
 
 # Main program logic follows:
 if __name__ == '__main__':
@@ -215,8 +224,4 @@ if __name__ == '__main__':
   print ('Press Ctrl-C to quit.')
 
   setupStream(onTweet)
-
-  while True:
-    time.sleep(1)
-    showTweet(strip)
       
