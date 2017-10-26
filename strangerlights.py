@@ -51,7 +51,7 @@ GREENMASK = 0b000000001111111100000000
 BLUEMASK = 0b000000000000000011111111
 
 # Other vars
-ALPHABET = '*******abcdefghijklm********zyxwvutsrqpon*********'  #alphabet that will be used
+ALPHABET = '*********nopqrstuvwxyz*******m*l*k*jihgfedcb*a***'#'*******abcdefghijklm********zyxwvutsrqpon*********'  #alphabet that will be used
 LIGHTSHIFT = 0  #shift the lights down the strand to the other end 
 FLICKERLOOP = 3  #number of loops to flicker
 
