@@ -221,6 +221,7 @@ def testLights(strip):
     strip.setPixelColor(num, GREEN)
   strip.show()
   while True:
+    print num
     strip.setPixelColor(num, RED)
     strip.show()
     time.sleep(1)
