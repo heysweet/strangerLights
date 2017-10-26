@@ -238,7 +238,6 @@ if __name__ == '__main__':
   strip.begin()
 
   print ('Press Ctrl-C to quit.')
-  testLights(strip)
 
   setupStream(strip, onTweet)
       
