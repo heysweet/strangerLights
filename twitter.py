@@ -21,10 +21,11 @@ class BotStreamer(tweepy.StreamListener):
     text = text.lower()
     text = text.replace(username, '').strip()
     text = ''.join([c for c in text if c in validChars])
-    self.onTweet(text)
+    self.onTweet(self.strip, text)
 
-def setupStream(on_tweet):    
+def setupStream(strip, on_tweet):    
   myStreamListener = BotStreamer()
+  myStreamListener.strip = strip
   myStreamListener.onTweet = on_tweet
 
   # Construct the Stream instance

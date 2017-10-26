@@ -209,10 +209,10 @@ def showTweet(strip):
   if len(tweets):
     showTweet(strip)
 
-def onTweet(text):
+def onTweet(strip, text):
   tweets.append(text)
   if not showingTweet:
-    showTweet()
+    showTweet(strip)
 
 # Main program logic follows:
 if __name__ == '__main__':
@@ -223,5 +223,5 @@ if __name__ == '__main__':
 
   print ('Press Ctrl-C to quit.')
 
-  setupStream(onTweet)
+  setupStream(strip, onTweet)
       
