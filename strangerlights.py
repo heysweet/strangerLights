@@ -51,7 +51,7 @@ GREENMASK = 0b000000001111111100000000
 BLUEMASK = 0b000000000000000011111111
 
 # Other vars
-ALPHABET = '*********nopqrstuvwxyz*******m*l*k*jihgfedcb*a***'#'*******abcdefghijklm********zyxwvutsrqpon*********'  #alphabet that will be used
+ALPHABET = '*********nopqrstuvwxyz*******m*l*k*jihgf*edcb*a***'#'*******abcdefghijklm********zyxwvutsrqpon*********'  #alphabet that will be used
 LIGHTSHIFT = 0  #shift the lights down the strand to the other end 
 FLICKERLOOP = 3  #number of loops to flicker
 
@@ -182,7 +182,7 @@ def showTweet(strip):
   #flicker each light, no delay between each
   for i in range(20):
     flicker(strip,random.randint(LIGHTSHIFT, len(ALPHABET) + LIGHTSHIFT))
-    time.sleep(random.randint(10,50)/1000.0)
+    time.sleep(random.randint(4,40)/1000.0)
 
   time.sleep(2)
 
@@ -201,7 +201,7 @@ def showTweet(strip):
   for i in range(len(ALPHABET)):
     strip.setPixelColor(s[i] + LIGHTSHIFT, COLORS[s[i] % colorLen])
     strip.show()
-    time.sleep(random.randint(10,80) / 1000.0)
+    time.sleep(random.randint(3,30) / 1000.0)
 
   initLights(strip)
   time.sleep(3.3)
