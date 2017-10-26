@@ -17,11 +17,9 @@ validChars = set(' abcdefghijklmnopqrstuvwxyz')
 class BotStreamer(tweepy.StreamListener):
   # Called when a new status arrives which is passed down from the on_data method of the StreamListener
   def on_status(self, status):
-    username = status.user.screen_name
-    status_id = status.id
-
-    text = status.text.replace(username , '').strip()
+    text = status.text
     text = text.lower()
+    text = text.replace(username, '').strip()
     text = ''.join([c for c in text if c in validChars])
     self.onTweet(text)
 
@@ -33,3 +31,9 @@ def setupStream(on_tweet):
   stream = tweepy.Stream(auth, myStreamListener)
   stream.filter(track=[username])
   return stream
+
+def log(x):
+  print(x)
+
+if __name__ == '__main__':
+  setupStream(log)
