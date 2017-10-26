@@ -90,7 +90,7 @@ def blinkWords(strip, word):
   for led in range(len(ALPHABET)):
     strip.setPixelColor(s[led] + LIGHTSHIFT, OFF)
     strip.show()
-    time.sleep(random.randint(2,35)/1000.0)
+    time.sleep(random.randint(2,22)/1000.0)
 
   #quick delay
   time.sleep(1.75)
@@ -180,7 +180,7 @@ def showTweet(strip):
   #flicker each light, no delay between each
   for i in range(20):
     flicker(strip,random.randint(LIGHTSHIFT, len(ALPHABET) + LIGHTSHIFT))
-    time.sleep(random.randint(4,40)/1000.0)
+    time.sleep(random.randint(10, 60)/1000.0)
 
   time.sleep(2)
 
@@ -199,7 +199,7 @@ def showTweet(strip):
   for i in range(len(ALPHABET)):
     strip.setPixelColor(s[i] + LIGHTSHIFT, COLORS[s[i] % colorLen])
     strip.show()
-    time.sleep(random.randint(3,30) / 1000.0)
+    time.sleep(random.randint(10, 70) / 1000.0)
 
   initLights(strip)
   time.sleep(3.3)
@@ -234,7 +234,6 @@ if __name__ == '__main__':
   strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
   # Intialize the library (must be called once before other functions).
   strip.begin()
-  initLights(strip)
 
   print ('Press Ctrl-C to quit.')
 
