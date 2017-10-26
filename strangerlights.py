@@ -88,7 +88,7 @@ def blinkWords(strip, word):
 
   #first, kill all lights in a semi-random fashion
   for led in range(len(ALPHABET)):
-    strip.setPixelColor(s[led]+LIGHTSHIFT, OFF)
+    strip.setPixelColor(s[led] + LIGHTSHIFT, OFF)
     strip.show()
     time.sleep(random.randint(10,80)/1000.0)
 
@@ -99,15 +99,16 @@ def blinkWords(strip, word):
   #otherwise, stall
   for character in word:
     if character in ALPHABET:
-      strip.setPixelColor(ALPHABET.index(character)+LIGHTSHIFT, RED)
+      strip.setPixelColor(ALPHABET.index(character) + LIGHTSHIFT, RED)
       strip.show()
-      time.sleep(1)
-      strip.setPixelColor(ALPHABET.index(character)+LIGHTSHIFT, OFF)
+      time.sleep(0.6)
+      strip.setPixelColor(ALPHABET.index(character) + LIGHTSHIFT, OFF)
       strip.show()
-      time.sleep(.5)
+      time.sleep(.23)
       print character
     else:
       time.sleep(.75)
+  print ' '
 
 def flicker(strip, ledNo):
   """
