@@ -92,6 +92,8 @@ def blinkWords(strip, word):
     strip.show()
     time.sleep(random.randint(10,80)/1000.0)
 
+  print ('all dead?', len(ALPHABET), LED_COUNT)
+
   #quick delay
   time.sleep(1.75)
 
@@ -213,6 +215,17 @@ def onTweet(strip, text):
   if len(tweets) == 1:
     showTweet(strip)
 
+def testLights(strip):
+  num = 0
+  while True:
+    strip.setPixelColor(num, RED)
+    strip.show()
+    time.sleep(1)
+    strip.setPixelColor(num, OFF)
+    strip.show()
+    time.sleep(0.5)
+    num = (num + 1) % LED_COUNT
+
 # Main program logic follows:
 if __name__ == '__main__':
   # Create NeoPixel object with appropriate configuration.
@@ -221,6 +234,7 @@ if __name__ == '__main__':
   strip.begin()
 
   print ('Press Ctrl-C to quit.')
+  testLights(strip)
 
   setupStream(strip, onTweet)
       
