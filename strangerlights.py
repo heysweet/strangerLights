@@ -326,10 +326,10 @@ def testLights(strip, numLoops):
     print num
     strip.setPixelColor(num, RED)
     strip.show()
-    time.sleep(0.08)
+    time.sleep(0.03)
     strip.setPixelColor(num, OFF)
     strip.show()
-    time.sleep(0.04)
+    time.sleep(0.015)
     num = (num + 1) % LED_COUNT
 
 # Main program logic follows:
