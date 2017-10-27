@@ -270,6 +270,11 @@ def flashWord(strip, word, color):
   timeDelta = 0.4
   offDelta = 0.2
 
+  for i in xrange(LED_COUNT):
+    strip.setPixelColor(i, OFF)
+  strip.show()
+  time.sleep(0.2)
+
   seen = set()
   for c in word:
     index = ALPHABET.index(c) + LIGHTSHIFT
