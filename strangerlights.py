@@ -23,6 +23,8 @@ people = set([
   'everyone'
 ])
 
+logging_username = 'heysweet'
+
 # LED strip configuration:
 LED_COUNT      = 50      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (must support PWM!).
@@ -318,7 +320,7 @@ def onTweet(strip, text, api):
     showTweet(strip)
   currGuests = set(people)
   if currGuests != oldGuests:
-    api.send_direct_message('heysweet', str(people))
+    api.send_direct_message(logging_username, text=str(people))
 
 def testLights(strip):
   num = 0
@@ -345,5 +347,5 @@ if __name__ == '__main__':
 
   print ('Press Ctrl-C to quit.')
 
-  setupStream(strip, onTweet)
+  setupStream(strip, onTweet, logging_username)
       
