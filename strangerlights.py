@@ -17,6 +17,11 @@ from twitter import setupStream
 #Start up random seed
 random.seed()
 tweets = []
+people = set([
+  'andrew',
+  'elizabeth',
+  'everyone'
+])
 
 # LED strip configuration:
 LED_COUNT      = 50      # Number of LED pixels.
@@ -162,20 +167,63 @@ def flicker(strip, ledNo):
 
 def sleep(duration, check):
   while duration >= 1:
-    if (check()):
+    if check():
       return
     time.sleep(1)
     duration -= 1
-  if (check()):
+  if check():
     return
   if duration:
     time.sleep(duration)
 
-def showTweet(strip):
-  if not len(tweets):
-    return
+keywords = set([
+  'hi', 'welcome', 'hello', 'greetings', 'hey', 'yo',
+  'bye', 'goodbye', 'good bye', 'adios',
+  'drink'
+])
 
-  text = tweets[0]
+def addPerson(strip, text):
+  if ' ' not in text and text not in keywords:
+    people.add(text)
+
+def removePerson(strip, text):
+  if ' ' not in text:
+    people.remove(text)
+
+def parseSpecial(strip, text):
+  triggers = ['hi', 'welcome', 'hello', 'greetings', 'hey', 'yo']
+  for hi in triggers:
+    greet = hi + ' '
+    if text.startswith(greet):
+      text = text[len(greet):]
+      addPerson(strip, text)
+      return False
+
+  triggers = ['bye', 'goodbye', 'good bye', 'adios']
+  for bye in triggers:
+    greet = bye + ' '
+    if text.startswith(greet):
+      text = text[len(greet):]
+      removePerson(strip, text)
+      return False
+
+  if text.startswith('drink'):
+    makeDrink(strip, text)
+    return True
+
+  return False
+
+def showTweet(strip, text=None):
+  if not text:
+    if not len(tweets):
+      return
+    text = tweets[0]
+    override = False
+  else:
+    override = True
+
+  if parseSpecial(strip, text):
+    return
 
   #flicker each light, no delay between each
   for i in range(20):
@@ -203,12 +251,50 @@ def showTweet(strip):
 
   initLights(strip)
   time.sleep(3.3)
-  tweets.pop(0)
+  if not override:
+    tweets.pop(0)
 
   if len(tweets):
     showTweet(strip)
 
+def flashWord(strip, word, color):
+  timeDelta = 0.4
+  offDelta = 0.2
+
+  seen = set()
+  for c in word:
+    index = ALPHABET.index(c) + LIGHTSHIFT
+    if index in seen:
+      strip.setPixelColor(index, OFF)
+      time.sleep(offDelta)
+    else:
+      seen.add(index)
+    strip.setPixelColor(index, color)
+    time.sleep(timeDelta)
+
+  time.sleep(timeDelta)
+  for index in seen:
+    strip.setPixelColor(index, OFF)
+
+def makeDrink(strip, text):
+  colors = [RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE]
+  name = random.sample(people, 1)[0]
+  for i in xrange(3 * len(colors)):
+    for j in xrange(LED_COUNT):
+      strip.setPixelColor(j, colors[(i + j) % len(colors)])
+    strip.show()
+    time.sleep(0.3334)
+
+  for color in [RED, YELLOW, GREEN]:
+    flashWord(strip, 'drink', color)
+
+  initLights(strip)
+  time.sleep(0.2)
+
+  showTweet(strip, name)
+
 def onTweet(strip, text):
+  print('Queued:', text)
   tweets.append(text)
   if len(tweets) == 1:
     showTweet(strip)
