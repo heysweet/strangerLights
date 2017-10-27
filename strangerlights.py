@@ -219,11 +219,11 @@ def showTweet(strip, text=None):
       return
     text = tweets[0]
     override = False
-  else:
-    override = True
 
     if parseSpecial(strip, text):
       return
+  else:
+    override = True
 
   #flicker each light, no delay between each
   for i in range(20):
