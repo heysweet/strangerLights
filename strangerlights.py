@@ -266,6 +266,7 @@ def showTweet(strip, text=None):
     showTweet(strip)
 
 def flashWord(strip, word, color):
+  print('FLASH', word)
   timeDelta = 0.4
   offDelta = 0.2
 
@@ -274,15 +275,18 @@ def flashWord(strip, word, color):
     index = ALPHABET.index(c) + LIGHTSHIFT
     if index in seen:
       strip.setPixelColor(index, OFF)
+      strip.show()
       time.sleep(offDelta)
     else:
       seen.add(index)
     strip.setPixelColor(index, color)
+    strip.show()
     time.sleep(timeDelta)
 
   time.sleep(timeDelta)
   for index in seen:
     strip.setPixelColor(index, OFF)
+  strip.show()
 
 def makeDrink(strip):
   colors = [RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE]
@@ -293,8 +297,8 @@ def makeDrink(strip):
     strip.show()
     time.sleep(0.15)
 
-  for color in [RED, YELLOW, GREEN]:
-    flashWord(strip, 'drink', color)
+  for c in [RED, YELLOW, GREEN]:
+    flashWord(strip, 'drink', c)
 
   initLights(strip)
   time.sleep(0.2)
