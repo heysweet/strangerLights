@@ -316,12 +316,13 @@ def onTweet(strip, text):
   if len(tweets) == 1:
     showTweet(strip)
 
-def testLights(strip):
+def testLights(strip, numLoops):
   num = 0
   for i in xrange(LED_COUNT):
     strip.setPixelColor(num, GREEN)
   strip.show()
-  while True:
+  while numLoops > 0:
+    numLoops -= 1
     print num
     strip.setPixelColor(num, RED)
     strip.show()
@@ -339,6 +340,8 @@ if __name__ == '__main__':
   strip.begin()
 
   print ('Press Ctrl-C to quit.')
+
+  testLights(strip, 10)
 
   setupStream(strip, onTweet)
       
