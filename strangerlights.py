@@ -214,16 +214,15 @@ def parseSpecial(strip, text):
   return False
 
 def showTweet(strip, text=None):
-  if not text:
-    if not len(tweets):
-      return
-    text = tweets[0]
-    override = False
+  if text:
+    tweets.insert(0, text)
 
-    if parseSpecial(strip, text):
-      return
-  else:
-    override = True
+  if not len(tweets):
+    return
+  text = tweets[0]
+
+  if parseSpecial(strip, text):
+    return
 
   #flicker each light, no delay between each
   for i in range(20):
@@ -251,8 +250,7 @@ def showTweet(strip, text=None):
 
   initLights(strip)
   time.sleep(3.3)
-  if not override:
-    tweets.pop(0)
+  tweets.pop(0)
 
   if len(tweets):
     showTweet(strip)
