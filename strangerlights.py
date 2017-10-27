@@ -326,10 +326,10 @@ def testLights(strip, numLoops):
     print num
     strip.setPixelColor(num, RED)
     strip.show()
-    time.sleep(1)
+    time.sleep(0.08)
     strip.setPixelColor(num, OFF)
     strip.show()
-    time.sleep(0.5)
+    time.sleep(0.04)
     num = (num + 1) % LED_COUNT
 
 # Main program logic follows:
@@ -341,7 +341,7 @@ if __name__ == '__main__':
 
   print ('Press Ctrl-C to quit.')
 
-  testLights(strip, 10)
+  testLights(strip, LED_COUNT)
 
   setupStream(strip, onTweet)
       
