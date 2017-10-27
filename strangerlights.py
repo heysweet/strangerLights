@@ -217,7 +217,7 @@ def showTweet(strip, text=None):
   if text:
     tweets.insert(0, text)
 
-  print('SHOW', tweet)
+  print('SHOW', text)
   print(tweets)
 
   if not len(tweets):
