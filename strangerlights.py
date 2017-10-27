@@ -208,14 +208,17 @@ def parseSpecial(strip, text):
       return False
 
   if text.startswith('drink'):
+    tweets.pop(0)
     makeDrink(strip)
     return True
 
   return False
 
 def showTweet(strip, text=None):
+  override = False
   if text:
     tweets.insert(0, text)
+    override = True
 
   print('SHOW', text)
   print(tweets)
@@ -227,12 +230,13 @@ def showTweet(strip, text=None):
   if parseSpecial(strip, text):
     return
 
-  #flicker each light, no delay between each
-  for i in range(20):
-    flicker(strip,random.randint(LIGHTSHIFT, len(ALPHABET) + LIGHTSHIFT))
-    time.sleep(random.randint(10, 60)/1000.0)
+  if not override:
+    #flicker each light, no delay between each
+    for i in range(20):
+      flicker(strip,random.randint(LIGHTSHIFT, len(ALPHABET) + LIGHTSHIFT))
+      time.sleep(random.randint(10, 60)/1000.0)
 
-  time.sleep(2)
+    time.sleep(2)
 
   #flash lights to word
   blinkWords(strip, text)
