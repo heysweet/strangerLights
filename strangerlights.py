@@ -327,10 +327,10 @@ def testLights(strip):
   strip.show()
 
   for i in xrange(LED_COUNT):
-    strip.setPixelColor(num, RED)
+    strip.setPixelColor(i, RED)
     strip.show()
     time.sleep(0.01)
-    strip.setPixelColor(num, OFF)
+    strip.setPixelColor(i, OFF)
     strip.show()
     time.sleep(0.005)
 
