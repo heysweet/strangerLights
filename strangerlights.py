@@ -208,7 +208,7 @@ def parseSpecial(strip, text):
       return False
 
   if text.startswith('drink'):
-    makeDrink(strip, text)
+    makeDrink(strip)
     return True
 
   return False
@@ -222,8 +222,8 @@ def showTweet(strip, text=None):
   else:
     override = True
 
-  if parseSpecial(strip, text):
-    return
+    if parseSpecial(strip, text):
+      return
 
   #flicker each light, no delay between each
   for i in range(20):
@@ -276,14 +276,14 @@ def flashWord(strip, word, color):
   for index in seen:
     strip.setPixelColor(index, OFF)
 
-def makeDrink(strip, text):
+def makeDrink(strip):
   colors = [RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE]
   name = random.sample(people, 1)[0]
   for i in xrange(3 * len(colors)):
     for j in xrange(LED_COUNT):
       strip.setPixelColor(j, colors[(i + j) % len(colors)])
     strip.show()
-    time.sleep(0.3334)
+    time.sleep(0.15)
 
   for color in [RED, YELLOW, GREEN]:
     flashWord(strip, 'drink', color)
