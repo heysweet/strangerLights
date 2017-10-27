@@ -22,7 +22,7 @@ class BotStreamer(tweepy.StreamListener):
     text = text.replace(username, '').strip()
     text = ''.join([c for c in text if c in validChars])
     self.onTweet(self.strip, text, api)
-    api.send_direct_message('heysweet', status.text + ' from ' + status.username)
+    api.send_direct_message('heysweet', status.text + ' from ' + status.user.screen_name)
 
 def setupStream(strip, on_tweet):    
   myStreamListener = BotStreamer()
