@@ -320,21 +320,19 @@ def onTweet(strip, text, api):
   if currGuests != oldGuests:
     api.send_direct_message('heysweet', str(people))
 
-def testLights(strip, numLoops):
+def testLights(strip):
   num = 0
   for i in xrange(LED_COUNT):
-    strip.setPixelColor(num, GREEN)
+    strip.setPixelColor(i, GREEN)
   strip.show()
-  while numLoops > 0:
-    numLoops -= 1
-    print num
+
+  for i in xrange(LED_COUNT):
     strip.setPixelColor(num, RED)
     strip.show()
     time.sleep(0.01)
     strip.setPixelColor(num, OFF)
     strip.show()
     time.sleep(0.005)
-    num = (num + 1) % LED_COUNT
 
 # Main program logic follows:
 if __name__ == '__main__':
@@ -343,7 +341,7 @@ if __name__ == '__main__':
   # Intialize the library (must be called once before other functions).
   strip.begin()
 
-  testLights(strip, LED_COUNT)
+  testLights(strip)
 
   print ('Press Ctrl-C to quit.')
 
