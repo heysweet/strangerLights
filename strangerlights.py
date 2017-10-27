@@ -95,10 +95,10 @@ def blinkWords(strip, word):
   for led in range(len(ALPHABET)):
     strip.setPixelColor(s[led] + LIGHTSHIFT, OFF)
     strip.show()
-    time.sleep(random.randint(2,22)/1000.0)
+    time.sleep(random.randint(2,15)/1000.0)
 
   #quick delay
-  time.sleep(1.75)
+  time.sleep(1.6)
 
   #if letter in alphabet, turn on 
   #otherwise, stall
@@ -112,6 +112,7 @@ def blinkWords(strip, word):
       time.sleep(.3)
       print character
     else:
+      print ' '
       time.sleep(.75)
   print ' '
 
@@ -185,9 +186,11 @@ keywords = set([
 def addPerson(strip, text):
   if ' ' not in text and text not in keywords:
     people.add(text)
+    print(str(people))
 
 def removePerson(strip, text):
   if ' ' not in text:
+    print('REMOVING', text)
     people.remove(text)
 
 def parseSpecial(strip, text):
@@ -234,9 +237,9 @@ def showTweet(strip, text=None):
     #flicker each light, no delay between each
     for i in range(20):
       flicker(strip,random.randint(LIGHTSHIFT, len(ALPHABET) + LIGHTSHIFT))
-      time.sleep(random.randint(10, 60)/1000.0)
+      time.sleep(random.randint(4, 34)/1000.0)
 
-    time.sleep(2)
+    time.sleep(1.6)
 
   #flash lights to word
   blinkWords(strip, text)
