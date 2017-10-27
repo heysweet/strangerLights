@@ -310,11 +310,15 @@ def makeDrink(strip):
 
   showTweet(strip, name)
 
-def onTweet(strip, text):
+def onTweet(strip, text, api):
+  oldGuests = set(people)
   print('Queued:', text)
   tweets.append(text)
   if len(tweets) == 1:
     showTweet(strip)
+  currGuests = set(people)
+  if currGuests != oldGuests:
+    api.send_direct_message('heysweet', str(people))
 
 def testLights(strip, numLoops):
   num = 0
@@ -339,9 +343,9 @@ if __name__ == '__main__':
   # Intialize the library (must be called once before other functions).
   strip.begin()
 
-  print ('Press Ctrl-C to quit.')
-
   testLights(strip, LED_COUNT)
+
+  print ('Press Ctrl-C to quit.')
 
   setupStream(strip, onTweet)
       
