@@ -269,8 +269,8 @@ def showTweet(strip, text=None):
 
 def flashWord(strip, word, color):
   print('FLASH', word)
-  timeDelta = 0.4
-  offDelta = 0.2
+  timeDelta = 0.22
+  offDelta = 0.11
 
   for i in xrange(LED_COUNT):
     strip.setPixelColor(i, OFF)
